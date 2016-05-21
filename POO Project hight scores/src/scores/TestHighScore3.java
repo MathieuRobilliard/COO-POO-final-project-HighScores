@@ -12,7 +12,7 @@ public class TestHighScore3 {
 static final String filePath = "data/scoreSamples.txt";
 	
 	/**
-	 * Step 1 and step2.
+	 * Step 1, step 2 and step 3.
 	 * @param args0
 	 * @throws IOException 
 	 */

@@ -67,9 +67,14 @@ public class HighScore3 {
 		}
 
 		return top10; 
-		
 		}
 	
+	
+	/**
+	 * This method send a BestPlayer to the ThingSpeaks website
+	 * @param p The best player who
+	 * @throws IOException
+	 */
 	public static void sendScore (BestPlayer p) throws IOException
 	{
 		String name = p.getPlayer();
