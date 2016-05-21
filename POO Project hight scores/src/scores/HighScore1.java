@@ -1,43 +1,43 @@
 package scores;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
-public class HighScore1 {
+public class HighScore1 { 
 	
-	
-	public static void main(String[] args0) {
-		getScores();
-	}
 	/**
-	 * This method open a HTTP connection with the web site and asks scores.
-	 * @return A array of few interesting lines to know for the scores.
+	 * This method opens an HTTP connection with the ThingSpeak website site and asks for scores.
+	 * @return containing the different interesting lines of result
 	 */
-	public static String[] getScores() {
+	public List<String> getScores() {
 
-		String[] highScoresArray = new String[10];	// Taille à définir.
+		List<String> highScoresList = new ArrayList<>();	
 		
 		try {
-			URL channelFeedURL = new URL("https://api.thingspeak.com/channels/109322/fields/1.json?results=2");
-			URLConnection connexion = channelFeedURL.openConnection();
-			InputStream flux = connexion.getInputStream();
-			int dataToRead = connexion.getContentLength();
+			URL channelFeedURL = new URL("https://api.thingspeak.com/channels/109322/feeds.csv");
+			InputStream scores = channelFeedURL.openStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(scores));
+			// Skipping the first line.
+			reader.readLine();
+			String readString = reader.readLine();
+			while (readString != null) {
+				if (readString.length() > 0) {
+					highScoresList.add(readString);
+				}
+				readString = reader.readLine();
 			
-			for(;dataToRead != 0; dataToRead--)
-			System.out.print((char)flux.read());
-			flux.close();
-			
-		} catch (Exception e1) {
+			} // End While 
+		} 
+		catch (Exception e1) {
 			e1.printStackTrace();
 		}	
 		
-		return highScoresArray;
+		return highScoresList;
 	}
-}
 
-/* A faire:
- * Extraire correctement les scores de la chaine de caractères.
- * Les mettre dans un tab
- * Renvoyer ce tab
- */
+}
