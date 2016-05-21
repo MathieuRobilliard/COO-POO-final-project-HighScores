@@ -61,7 +61,7 @@ public class HighScore2 {
 		Collections.sort(allBest, Collections.reverseOrder());
 		
 		for (int i = 0; i <10; i++) {
-			top10[i] = allBest.get(i);
+			top10[i] = allBest.get(i); 
 		}
 
 		return top10; 
